@@ -1,0 +1,4 @@
+Source: openexr
+Version: 2.2.0
+Build-Depends: zlib, ilmbase
+Description: TODO: Write something smart
