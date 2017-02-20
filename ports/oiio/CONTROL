@@ -1,0 +1,4 @@
+Source: oiio
+Version: 1.7.0
+Build-Depends: openexr, libpng, tiff, libjpeg-turbo, boost, libraw, libwebp, freetype, glew
+Description: TODO: Write something smart
