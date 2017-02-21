@@ -30,7 +30,7 @@ set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/)
 vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES 
-        ${CMAKE_CURRENT_LIST_DIR}/Math.patch
+        ${CMAKE_CURRENT_LIST_DIR}/Math.h.patch
         ${CMAKE_CURRENT_LIST_DIR}/InstrProfReader.h.patch
         ${CMAKE_CURRENT_LIST_DIR}/CostAllocator.h.patch
 )
@@ -54,7 +54,7 @@ vcpkg_install_cmake()
 
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
 file(COPY ${SOURCE_PATH}/LICENSE.TXT DESTINATION ${CURRENT_PACKAGES_DIR}/share/llvm)
-file(RENAME ${CURRENT_PACKAGES_DIR}/share/oiio/LICENSE.TXT ${CURRENT_PACKAGES_DIR}/share/llvm/copyright)
+file(RENAME ${CURRENT_PACKAGES_DIR}/share/llvm/LICENSE.TXT ${CURRENT_PACKAGES_DIR}/share/llvm/copyright)
 
 set(BIN_ROOT_RELEASE ${CURRENT_PACKAGES_DIR}/bin) 
 set(BIN_ROOT_DEBUG ${CURRENT_PACKAGES_DIR}/debug/bin) 
