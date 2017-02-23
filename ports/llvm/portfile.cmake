@@ -53,6 +53,15 @@ vcpkg_install_cmake()
 
 
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
+# Remove LTO.dll which for some reason is always built as a DLL
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/bin)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin)
+
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/intrinsics_gen)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/intrinsics_gen)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/include/llvm/IR/x64)
+
 file(COPY ${SOURCE_PATH}/LICENSE.TXT DESTINATION ${CURRENT_PACKAGES_DIR}/share/llvm)
 file(RENAME ${CURRENT_PACKAGES_DIR}/share/llvm/LICENSE.TXT ${CURRENT_PACKAGES_DIR}/share/llvm/copyright)
 
