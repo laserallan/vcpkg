@@ -1,0 +1,26 @@
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index d3e3365..04ceaf8 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
+@@ -57,10 +57,21 @@ IF (NOT WIN32)
+   SET ( PTHREAD_LIB pthread )
+ ENDIF()
+ 
++IF (ILMBASE_LIB_DIR)
++#Added code path for explicitly locating the ilmbase lib dir
++INCLUDE_DIRECTORIES ( ${ILMBASE_PACKAGE_PREFIX}/include/OpenEXR )
++LINK_DIRECTORIES ( ${ILMBASE_LIB_DIR} )
++MESSAGE ( "ILMBASE_PACKAGE_PREFIX = " ${ILMBASE_PACKAGE_PREFIX})
++MESSAGE ( "ILMBASE_LIB_DIR = " ${ILMBASE_LIB_DIR})
++
++ELSE (ILMBASE_LIB_DIR)
++#Original code path using ilmbase_package_prefix for both libraries and include
+ INCLUDE_DIRECTORIES ( ${ILMBASE_PACKAGE_PREFIX}/include/OpenEXR )
+ LINK_DIRECTORIES ( ${ILMBASE_PACKAGE_PREFIX}/lib )
+ MESSAGE ( "ILMBASE_PACKAGE_PREFIX = " ${ILMBASE_PACKAGE_PREFIX})
+ 
++ENDIF (ILMBASE_LIB_DIR)
++
+ SET (LIB_TYPE STATIC)
+ IF (BUILD_SHARED_LIBS)
+   # User wants to build Dynamic Libraries, so change the LIB_TYPE variable to CMake keyword 'SHARED'

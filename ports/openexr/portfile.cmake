@@ -7,6 +7,13 @@ vcpkg_download_distfile(ARCHIVE
 )
 vcpkg_extract_source_archive(${ARCHIVE})
 
+vcpkg_apply_patches(
+    SOURCE_PATH ${SOURCE_PATH}
+    PATCHES 
+        ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt.patch
+)
+
+
 # CURRENT_PACKAGES_DIR is not set here but we need it to
 # Get the path to half.h into the includes
 # and the path to the binaries dir to include half.dll for the build to work
@@ -17,7 +24,7 @@ vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     OPTIONS -DILMBASE_PACKAGE_PREFIX=${PRE_PACKAGES_DIR}
     #OPTIONS_RELEASE -DCMAKE_EXE_LINKER_FLAGS=/LIBPATH:"${PRE_PACKAGES_DIR}/lib"
-    #OPTIONS_DEBUG -DCMAKE_EXE_LINKER_FLAGS=/LIBPATH:"${PRE_PACKAGES_DIR}/debug/lib"
+    OPTIONS_DEBUG -DILMBASE_LIB_DIR="${PRE_PACKAGES_DIR}/debug/lib"
 )
 
 vcpkg_install_cmake()
@@ -40,24 +47,29 @@ if (VCPKG_LIBRARY_LINKAGE STREQUAL dynamic)
 	file(GLOB DEBUG_DLLS ${LIB_ROOT_DEBUG}/*.dll)
 	file(GLOB BINS ${BIN_ROOT_RELEASE}/*.exe ${BIN_ROOT_DEBUG}/*.exe)
 
-foreach(DLL_FILE ${RELEASE_DLLS})
-	get_filename_component(DLL_ONLY ${DLL_FILE} NAME)
-	file(RENAME ${DLL_FILE} ${BIN_ROOT_RELEASE}/${DLL_ONLY})
-endforeach(DLL_FILE)
+	foreach(DLL_FILE ${RELEASE_DLLS})
+		get_filename_component(DLL_ONLY ${DLL_FILE} NAME)
+		file(RENAME ${DLL_FILE} ${BIN_ROOT_RELEASE}/${DLL_ONLY})
+	endforeach(DLL_FILE)
 
-foreach(DLL_FILE ${DEBUG_DLLS})
-	get_filename_component(DLL_ONLY ${DLL_FILE} NAME)
-	file(RENAME ${DLL_FILE} ${BIN_ROOT_DEBUG}/${DLL_ONLY})
-endforeach(DLL_FILE)
+	foreach(DLL_FILE ${DEBUG_DLLS})
+		get_filename_component(DLL_ONLY ${DLL_FILE} NAME)
+		file(RENAME ${DLL_FILE} ${BIN_ROOT_DEBUG}/${DLL_ONLY})
+	endforeach(DLL_FILE)
+
+	# Remove exe's
+	foreach(BIN_FILE ${BINS})
+		file(REMOVE ${BIN_FILE})
+	endforeach(BIN_FILE)
+
+else()
+
+	file(REMOVE_RECURSE ${BIN_ROOT_RELEASE})
+	file(REMOVE_RECURSE ${BIN_ROOT_DEBUG})
+	
+endif()
 
 # Remove Share in the debug build
 file(REMOVE_RECURSE ${SHARE_ROOT_DEBUG})
-
-# Remove exe's
-foreach(BIN_FILE ${BINS})
-	file(REMOVE ${BIN_FILE})
-endforeach(BIN_FILE)
-	
-endif()
 
 vcpkg_copy_pdbs()
