@@ -1,0 +1,11 @@
+diff --git "a/src/nuke/txWriter/CMakeLists.txt" "b/src/nuke/txWriter/CMakeLists.txt"
+index 66312bc..376b453 100644
+--- "a/src/nuke/txWriter/CMakeLists.txt"
++++ "b/src/nuke/txWriter/CMakeLists.txt"
+@@ -1,5 +1,5 @@
+ include_directories (${NUKE_INCLUDE_DIRS})
+-link_directories (${NUKE_LIBRARY_DIRS})
++#link_directories (${NUKE_LIBRARY_DIRS})
+ 
+ add_library (txWriter SHARED
+     txWriter.cpp)

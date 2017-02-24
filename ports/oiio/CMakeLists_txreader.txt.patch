@@ -1,0 +1,11 @@
+diff --git "a/src/nuke/txReader/CMakeLists.txt" "b/src/nuke/txReader/CMakeLists.txt"
+index 3e72b6d..8155f14 100644
+--- "a/src/nuke/txReader/CMakeLists.txt"
++++ "b/src/nuke/txReader/CMakeLists.txt"
+@@ -1,5 +1,5 @@
+ include_directories (${NUKE_INCLUDE_DIRS})
+-link_directories (${NUKE_LIBRARY_DIRS})
++# link_directories (${NUKE_LIBRARY_DIRS})
+ 
+ add_library (txReader SHARED
+     txReader.cpp)

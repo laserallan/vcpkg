@@ -1,0 +1,13 @@
+diff --git "a/src/cmake/externalpackages.cmake" "b/src/cmake/externalpackages.cmake"
+index c4da147..03faf7b 100644
+--- "a/src/cmake/externalpackages.cmake"
++++ "b/src/cmake/externalpackages.cmake"
+@@ -203,7 +203,7 @@ if (NOT boost_PYTHON_FOUND)
+ endif ()
+ 
+ include_directories (SYSTEM "${Boost_INCLUDE_DIRS}")
+-link_directories ("${Boost_LIBRARY_DIRS}")
++#link_directories ("${Boost_LIBRARY_DIRS}")
+ 
+ # end Boost setup
+ ###########################################################################

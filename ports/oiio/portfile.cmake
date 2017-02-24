@@ -27,6 +27,15 @@ message(STATUS "Adding worktree done")
 
 set(SOURCE_PATH ${CURRENT_BUILDTREES_DIR}/src/)
 
+vcpkg_apply_patches(
+    SOURCE_PATH ${SOURCE_PATH}
+    PATCHES 
+        ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt.patch
+        ${CMAKE_CURRENT_LIST_DIR}/externalpackages.cmake.patch
+        ${CMAKE_CURRENT_LIST_DIR}/CMakeLists_txreader.txt.patch
+        ${CMAKE_CURRENT_LIST_DIR}/CMakeLists_txwriter.txt.patch
+)
+
 # CURRENT_PACKAGES_DIR is not set here but we need it to
 # Get the path to half.h into the includes
 # and the path to the binaries dir to include half.dll for the build to work

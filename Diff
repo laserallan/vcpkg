@@ -1,0 +1,51 @@
+File buildtrees\oiio\src/.git is a regular file while file c:\temp\oiio/.git is a directory
+diff -r "buildtrees\\oiio\\src/CMakeLists.txt" "c:\\temp\\oiio/CMakeLists.txt"
+223,224d222
+< 
+< 
+459c457
+<     #add_definitions (-DOPENEXR_DLL)
+---
+>     add_definitions (-DOPENEXR_DLL)
+diff -r "buildtrees\\oiio\\src/src/build-scripts/OpenEXR-CMakeLists.txt" "c:\\temp\\oiio/src/build-scripts/OpenEXR-CMakeLists.txt"
+62,70d61
+< IF (ILMBASE_LIB_DIR)
+< #Added code path for explicitly locating the ilmbase lib dir
+< INCLUDE_DIRECTORIES ( ${ILMBASE_PACKAGE_PREFIX}/include/OpenEXR )
+< LINK_DIRECTORIES ( ${ILMBASE_LIB_DIR} )
+< MESSAGE ( "ILMBASE_PACKAGE_PREFIX = " ${ILMBASE_PACKAGE_PREFIX})
+< MESSAGE ( "ILMBASE_LIB_DIR = " ${ILMBASE_LIB_DIR})
+< 
+< ELSE (ILMBASE_LIB_DIR)
+< #Original code path using ilmbase_package_prefix for both libraries and include
+74,75d64
+< 
+< ENDIF (ILMBASE_LIB_DIR)
+diff -r "buildtrees\\oiio\\src/src/cmake/externalpackages.cmake" "c:\\temp\\oiio/src/cmake/externalpackages.cmake"
+206c206
+< #link_directories ("${Boost_LIBRARY_DIRS}")
+---
+> link_directories ("${Boost_LIBRARY_DIRS}")
+diff -r "buildtrees\\oiio\\src/src/libOpenImageIO/imagebuf.cpp" "c:\\temp\\oiio/src/libOpenImageIO/imagebuf.cpp"
+250c250
+<     void threads (int n) { m_threads = n; }
+---
+>     void threads (int n) const { m_threads = n; }
+278c278
+<     int m_threads;               ///< thread policy for this image
+---
+>     mutable int m_threads;       ///< thread policy for this image
+1304c1304
+<     impl()->threads();
+---
+>     impl()->threads(n);
+diff -r "buildtrees\\oiio\\src/src/nuke/txReader/CMakeLists.txt" "c:\\temp\\oiio/src/nuke/txReader/CMakeLists.txt"
+2c2
+< # link_directories (${NUKE_LIBRARY_DIRS})
+---
+> link_directories (${NUKE_LIBRARY_DIRS})
+diff -r "buildtrees\\oiio\\src/src/nuke/txWriter/CMakeLists.txt" "c:\\temp\\oiio/src/nuke/txWriter/CMakeLists.txt"
+2c2
+< # link_directories (${NUKE_LIBRARY_DIRS})
+---
+> link_directories (${NUKE_LIBRARY_DIRS})
